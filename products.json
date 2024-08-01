@@ -1,0 +1,35 @@
+[
+    {
+        "title": "Plato",
+        "category": "Electrodomésticos",
+        "description": "Plato de cerámica",
+        "price": 1700,
+        "thumbnail": "ruta/imagen.jpg",
+        "stock": 15,
+        "id": 1,
+        "code": "1Plato",
+        "status": true
+    },
+    {
+        "title": "Jarra",
+        "category": "Electrodomésticos",
+        "description": "Jarra de cerámica",
+        "price": 2300,
+        "thumbnail": "ruta/imagen.jpg",
+        "stock": 20,
+        "id": 2,
+        "code": "2Jarra",
+        "status": true
+    },
+    {
+        "title": "Taza",
+        "category": "Electrodomésticos",
+        "description": "Taza de Porcelana",
+        "price": 1800,
+        "thumbnail": "ruta/imagen.jpg",
+        "stock": 5,
+        "id": 3,
+        "code": "3Taza",
+        "status": true
+    }
+]
