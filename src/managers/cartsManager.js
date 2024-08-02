@@ -22,7 +22,7 @@ class CartManager {
     getCartById = async (cartId) => {
         try {
             const carts = await this.getCart()
-            const resultado = carts.find(cart => cart.id === cartId)
+            const resultado = carts.find(cart => cart.id === Number(cartId))
             if (resultado) {
                 return resultado;
             } else {
@@ -32,7 +32,6 @@ class CartManager {
         } catch (error) {
             return console.log('El carrito buscado no existe');
         }
-
     }
 
     createCart = async (products = []) => {
@@ -58,14 +57,14 @@ class CartManager {
     createProductCart = async (cartId, productId, quantity) => {
         try {
             const carts = await this.getCart();
-            const cart = carts.find(cart => cart.id === cartId);
+            const cart = carts.find(cart => cart.id === Number(cartId));
 
             if (!cart) {
                 console.log('Carrito no encontrado');
                 return null;
             }
 
-            const existProduct = cart.products.find(prod => prod.productId === productId)
+            const existProduct = cart.products.find(prod => prod.productId === Number(productId))
 
             if (existProduct) {
                 existProduct.quantity += quantity
@@ -95,40 +94,6 @@ class CartManager {
 const cartManager = new CartManager('./carts.json')
 
 
-const crearProducto = async () => {
-    try {
-        const newCart = await cartManager.createCart();
-        if (!newCart) {
-            throw new Error('Error al crear el carrito');
-        }
-        const updatedCart = await cartManager.createProductCart(newCart.id, 1, 1);
-        await cartManager.createProductCart(newCart.id, 1, 2);
 
-        if (!updatedCart) {
-            throw new Error('Error al añadir el producto al carrito');
-        }
-        console.log('Carrito actualizado:', updatedCart);
-        return updatedCart;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
-
-// crearProducto()
-
-const encontrar = async (cartId) => {
-
-    try {
-        const encontrar = await cartManager.getCartById(cartId)
-        console.log(encontrar);
-        return encontrar
-    } catch (error) {
-        return console.log('El carrito buscado no existe');
-    }
-
-}
-
-encontrar(5)
 
 module.exports = CartManager
