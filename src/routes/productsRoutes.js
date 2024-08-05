@@ -6,7 +6,6 @@ const productos = new ProductManager('./products.json')
 
 
 
-// traer productos
 router.get('/', async (req, res) => {
     try {
         const mostrarLista = await productos.getProducts();
@@ -17,7 +16,6 @@ router.get('/', async (req, res) => {
 
 });
 
-// traer producto por id 
 router.get('/:pid', async (req, res) => {
     const { pid } = req.params
     try {
@@ -30,8 +28,6 @@ router.get('/:pid', async (req, res) => {
 })
 
 
-
-//crear productos 
 router.post('/', async (req, res) => {
 
     const { title, category, description, price, thumbnail, stock } = req.body;
@@ -46,7 +42,6 @@ router.post('/', async (req, res) => {
 })
 
 
-// actualizar productos
 router.put('/:pid', async (req, res) => {
     const { pid } = req.params;
     const newDetails = req.body
@@ -59,7 +54,6 @@ router.put('/:pid', async (req, res) => {
     }
 });
 
-// borrar un producto
 router.delete('/:pid', async (req, res) => {
 
     const { pid } = req.params

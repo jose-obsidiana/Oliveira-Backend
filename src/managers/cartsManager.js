@@ -1,6 +1,7 @@
 const fs = require("fs");
 
 
+
 class CartManager {
 
     constructor(path) {
@@ -54,7 +55,12 @@ class CartManager {
         }
     }
 
-    createProductCart = async (cartId, productId, quantity) => {
+
+
+
+
+
+    createProductCart = async (cartId, productId) => {
         try {
             const carts = await this.getCart();
             const cart = carts.find(cart => cart.id === Number(cartId));
@@ -63,22 +69,21 @@ class CartManager {
                 console.log('Carrito no encontrado');
                 return null;
             }
-
-            const existProduct = cart.products.find(prod => prod.productId === Number(productId))
+            const existProduct = cart.products.find(prod => Number(prod.productId) === Number(productId))
 
             if (existProduct) {
-                existProduct.quantity += quantity
+                existProduct.quantity += 1
             }
             else {
                 const product = {
                     productId: productId,
-                    quantity: quantity
+                    quantity: 1
                 };
                 cart.products.push(product);
+                console.log('Producto añadido al carrito:', product);
             }
 
             await fs.promises.writeFile(this.path, JSON.stringify(carts), 'utf-8');
-            console.log('Producto añadido al carrito correctamente');
             return cart;
 
         } catch (error) {
@@ -88,10 +93,6 @@ class CartManager {
     }
 }
 
-
-
-
-const cartManager = new CartManager('./carts.json')
 
 
 
