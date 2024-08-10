@@ -11,18 +11,7 @@
         "status": true
     },
     {
-        "title": "Jarra",
-        "category": "Electrodomésticos",
-        "description": "Jarra de cerámica",
-        "price": 2300,
-        "thumbnail": "ruta/imagen.jpg",
-        "stock": 15,
-        "id": 2,
-        "code": "2Jarra",
-        "status": true
-    },
-    {
-        "title": "Taza",
+        "title": "nueva prueba",
         "category": "Electrodomésticos",
         "description": "Taza de Porcelana",
         "price": 1500,

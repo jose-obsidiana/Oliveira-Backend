@@ -2,7 +2,7 @@ const { Router } = require("express");
 const CartManager = require("../managers/cartsManager");
 
 const router = Router();
-const cartManager = new CartManager('./carts.json')
+const cartManager = new CartManager('./dbJson/carts.json')
 
 
 
@@ -20,6 +20,9 @@ router.get('/:cid', async (req, res) => {
     const { cid } = req.params
     try {
         const getCart = await cartManager.getCartById(cid)
+        if (!getCart) {
+            res.status(404).send({ status: 'error', message: 'El carrito que buscas no existe o no se encuentra disponible.' })
+        }
         res.send({ status: 'success', data: getCart })
     } catch (error) {
         console.log('Carrito no encontrado', error);
@@ -48,7 +51,10 @@ router.post('/:cid/products/:pid', async (req, res) => {
         res.send({ status: 'success', data: updatedCart })
     } catch (error) {
         console.error(error);
-        return null;
+        if (error.message === 'Error, producto no encontrado en la base de datos') {
+            return res.status(404).json({ status: 'error', message: error.message });
+        }
+        res.status(500).json({ status: 'error', message: 'Error en el servidor al procesar la solicitud' });
     }
 })
 

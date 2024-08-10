@@ -1,5 +1,7 @@
 const fs = require("fs");
+const ProductManager = require('../managers/productsManagers.js')
 
+const productManager = new ProductManager('./dbJson/products.json')
 
 
 class CartManager {
@@ -64,16 +66,23 @@ class CartManager {
         try {
             const carts = await this.getCart();
             const cart = carts.find(cart => cart.id === Number(cartId));
+            const products = await productManager.getProducts()
 
             if (!cart) {
                 console.log('Carrito no encontrado');
-                return null;
+                throw new Error;
             }
-            const existProduct = cart.products.find(prod => Number(prod.productId) === Number(productId))
 
+            const productJson = products.find(prod => prod.id === Number(productId))
+            if (!productJson) {
+                throw new Error('Error, producto no encontrado en la base de datos')
+            }
+
+            const existProduct = cart.products.find(prod => Number(prod.productId) === Number(productId))
             if (existProduct) {
                 existProduct.quantity += 1
             }
+
             else {
                 const product = {
                     productId: productId,
@@ -82,13 +91,12 @@ class CartManager {
                 cart.products.push(product);
                 console.log('Producto añadido al carrito:', product);
             }
-
             await fs.promises.writeFile(this.path, JSON.stringify(carts), 'utf-8');
             return cart;
 
         } catch (error) {
             console.log('Error al agregar producto al carrito', error);
-            return null;
+            throw error;
         }
     }
 }
