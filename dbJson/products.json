@@ -1,24 +1,44 @@
 [
     {
-        "title": "Plato",
-        "category": "Electrodomésticos",
-        "description": "Plato de cerámica",
-        "price": 1700,
-        "thumbnail": "ruta/imagen.jpg",
-        "stock": 15,
-        "id": 1,
-        "code": "1Plato",
+        "title": "ayuda",
+        "category": "mn",
+        "description": "m,n",
+        "price": 23,
+        "stock": 32,
+        "file": "/static/assets/img/1723761212033-WhatsApp Image 2024-08-13 at 22.09.16.jpeg",
+        "code": "SKU14"
+    },
+    {
+        "title": "klj",
+        "category": "lkj",
+        "description": "lkj",
+        "price": 652,
+        "thumbnail": "/static/assets/img/1723763465234-WhatsApp Image 2024-08-13 at 22.08.49.jpeg",
+        "stock": 652,
+        "code": "SKUNaN",
+        "id": null,
         "status": true
     },
     {
-        "title": "nueva prueba",
-        "category": "Electrodomésticos",
-        "description": "Taza de Porcelana",
-        "price": 1500,
-        "thumbnail": "ruta/imagen.jpg",
-        "stock": 5,
-        "id": 3,
-        "code": "3Taza",
+        "title": "lkj",
+        "category": "jlkj",
+        "description": "lkj",
+        "price": 654,
+        "file": "/static/assets/img/1723765696302-WhatsApp Image 2024-08-13 at 22.08.49.jpeg",
+        "stock": 213,
+        "code": "SKU1",
+        "id": 1,
+        "status": true
+    },
+    {
+        "title": "siiiiiiiiiii",
+        "category": "lknj,",
+        "description": "m,n,mn,",
+        "price": 53,
+        "file": "/static/assets/img/1723765748013-WhatsApp Image 2024-08-13 at 22.08.49.jpeg",
+        "stock": 6,
+        "code": "SKU2",
+        "id": 2,
         "status": true
     }
 ]

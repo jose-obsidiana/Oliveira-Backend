@@ -1,0 +1,75 @@
+<main>
+    <h1>Real Time Products</h1>
+
+    {{#if isAdmin}}
+
+    <section class="form-container">
+        <form action="/" method="post" enctype="multipart/form-data" id="form" class="flex-column ">
+            <h2 class="h2-form">Agregar Nuevo Producto</h2>
+            <div class="flex-column">
+                <label for="title">Nombre</label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div class="flex-column">
+                <label for="category">Categoría </label>
+                <input type="text" name="category" id="category" required>
+            </div>
+            <div class="flex-column">
+                <label for="description">Descripción </label>
+                <input type="text" name="description" id="description" required>
+            </div>
+            <div class="flex-column">
+                <label for="price">Precio </label>
+                <input type="number" name="price" id="price" required>
+            </div>
+            <div class="flex-column">
+                <label for="stock">Stock </label>
+                <input type="number" name="stock" id="stock" required>
+            </div>
+            {{!-- <div class="flex-column">
+                <label for="code">Code </label>
+                <input type="text" name="stock" id="code" required>
+            </div> --}}
+
+            <div class="flex-column">
+                <label for="myFile">Imagen</label>
+                <input type="file" name="myFile" id="myFile" required>
+            </div>
+
+            <button type="submit" id="enviar" class="buttonEnviar">enviar</button>
+        </form>
+    </section>
+
+
+    <div class="lista-container">
+        <ul class="lista-detalles">
+            <li>Img</li>
+            <li>Producto</li>
+            <li>Categoría</li>
+            <li>Descripción</li>
+            <li>Precio</li>
+            <li>Stock</li>
+            <li>Código</li>
+
+        </ul>
+
+    </div>
+
+    <div id="listaProducts"></div>
+    <br>
+
+
+    {{else}}
+    <h2>No tienes acceso para ver los productos</h2>
+    {{/if}}
+
+
+</main>
+
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/path/to/realtime.js"></script>
+<!-- para saber si está bien importada la libreria: socket.io/socket.io.js !-->
+<script src="/static/assets/js/realtime.js"></script>

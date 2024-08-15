@@ -40,38 +40,43 @@ class ProductManager {
     }
 
     // agregar products
-    async addProduct(title, category, description, price, thumbnail, stock) {
+    async addProduct(title, category, description, price, file, stock) {
 
         try {
-            let products = await this.getProducts()
+            let products = await this.getProducts();
             let newId = products.length > 0 ? products[products.length - 1].id + 1 : 1;
 
-            const product = {
-                title: title,
-                category: category,
-                description: description,
-                price: price,
-                thumbnail: thumbnail,
-                stock: stock,
-                id: newId,
-                code: 'SKU' + newId,
-                status: true
-            }
+            const code = 'SKU' + newId;
 
+            const product = {
+                title,
+                category,
+                description,
+                price,
+                file,
+                stock,
+                code,
+                id: newId,
+                status: true
+            };
+
+            // Verificar si ya existe un producto con el mismo código
             const exists = products.some(p => p.code === product.code);
             if (exists) {
-                throw new Error(`El producto con el código ${code} ya existe`)
+                throw new Error(`El producto con el código ${code} ya existe`);
             }
 
-            products.push(product)
-            await fs.promises.writeFile(this.path, JSON.stringify(products), 'utf-8') // agrego mis nuevos productos en un json
-            this.products = products
+            products.push(product);
+            await fs.promises.writeFile(this.path, JSON.stringify(products), 'utf-8');
+            this.products = products;
             console.log('Producto agregado correctamente');
             return product;
         } catch (error) {
             console.log('Error al agregar producto:', error);
+            throw error; // Propaga el error para manejarlo adecuadamente
         }
-    };
+    }
+
 
 
 
@@ -135,7 +140,6 @@ class ProductManager {
         }
     }
 }
-
 
 
 module.exports = ProductManager

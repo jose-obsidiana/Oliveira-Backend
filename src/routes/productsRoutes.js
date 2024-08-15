@@ -10,9 +10,14 @@ router.get('/', async (req, res) => {
 
     try {
         const mostrarLista = await productos.getProducts();
+        if (!mostrarLista) {
+            res.status(400).send({ status: 'error', message: 'Error al obtener los productos' });
+        }
         res.send({ status: 'success', data: mostrarLista })
     } catch (error) {
         console.log('Productos no encontrados', error);
+        res.status(500).send({ status: 'error', message: 'Error al obtener los productos' });
+
     }
 
 });

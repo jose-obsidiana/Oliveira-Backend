@@ -1,0 +1,38 @@
+<main>
+    <h1>Home</h1>
+
+    {{#if isAdmin}}
+
+    <div class="lista-container">
+        <ul class="lista-detalles">
+            <li>Producto</li>
+            <li>Categoría</li>
+            <li>Descripción</li>
+            <li>Precio</li>
+            <li>Stock</li>
+        </ul>
+
+        {{#each mostrarLista}}
+
+        <ul class="lista-productos">
+            <li>{{this.title}}</li>
+            <li>{{this.category}}</li>
+            <li>{{this.description}}</li>
+            <li>{{this.price}}</li>
+            <li>{{this.stock}}</li>
+        </ul>
+
+        {{/each}}
+
+    </div>
+
+
+    {{else}}
+    <h2>No tienes acceso para ver los productos</h2>
+    {{/if}}
+
+</main>
+
+
+
+<script src="/static/assets/js/index.js"></script>
