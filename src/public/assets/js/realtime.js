@@ -71,13 +71,14 @@ socket.on('listaProducts', (data) => {
         productosHTML = productosHTML + `
         <div class="lista-container">
            <ul class="lista-productos">
-                <li><img  src="${prod.file}" alt="${prod.title}"></li>
+                <li><img src="${prod.file}" alt="${prod.title}"></li>
                 <li>${prod.title}</li>
                 <li>${prod.category}</li>
                 <li>${prod.description}</li>
                 <li>${prod.price}</li>
                 <li>${prod.stock}</li>
-
+                <li>${prod.code}</li>
+                <li>${prod.id}</li>
             </ul>
         </div>
         `

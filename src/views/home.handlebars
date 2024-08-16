@@ -5,21 +5,31 @@
 
     <div class="lista-container">
         <ul class="lista-detalles">
+            <li>Img</li>
             <li>Producto</li>
             <li>Categoría</li>
             <li>Descripción</li>
             <li>Precio</li>
             <li>Stock</li>
+            <li>Código</li>
+            <li>Id</li>
+
+
         </ul>
 
         {{#each mostrarLista}}
 
         <ul class="lista-productos">
+            <li>{{this.file}}</li>
             <li>{{this.title}}</li>
             <li>{{this.category}}</li>
             <li>{{this.description}}</li>
             <li>{{this.price}}</li>
             <li>{{this.stock}}</li>
+            <li>{{this.code}}</li>
+            <li>{{this.id}}</li>
+
+
         </ul>
 
         {{/each}}
