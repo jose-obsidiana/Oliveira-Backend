@@ -3,39 +3,18 @@
 
     {{#if isAdmin}}
 
-    <div class="lista-container">
-        <ul class="lista-detalles">
-            <li>Img</li>
-            <li>Producto</li>
-            <li>Categoría</li>
-            <li>Descripción</li>
-            <li>Precio</li>
-            <li>Stock</li>
-            <li>Código</li>
-            <li>Id</li>
-
-
-        </ul>
-
+    <div class="home-container">
         {{#each mostrarLista}}
-
-        <ul class="lista-productos">
+        <ul>
+            <li>
+                <h4>{{this.title}}</h4>
+            </li>
             <li><img src="{{file}}" alt="{{this.title}}"></li>
-            <li>{{this.title}}</li>
-            <li>{{this.category}}</li>
             <li>{{this.description}}</li>
-            <li>{{this.price}}</li>
-            <li>{{this.stock}}</li>
-            <li>{{this.code}}</li>
-            <li>{{this.id}}</li>
-
-
+            <li><strong>${{this.price}}</strong></li>
         </ul>
-
         {{/each}}
-
     </div>
-
 
     {{else}}
     <h2>No tienes acceso para ver los productos</h2>

@@ -45,7 +45,6 @@ router.post('/upload', uploader.single('myFile'), async (req, res) => {
             // Emitir la lista completa de productos
             const io = getIo();
             io.emit('listaProducts', updatedProducts);
-            res.json({ file: filePath, message: 'Producto subido con éxito' });
         } catch (error) {
             res.status(500).send({ status: 'error', message: 'Error de servidor' });
             console.log('Error al agregar producto:', error);

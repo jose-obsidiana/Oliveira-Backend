@@ -50,11 +50,37 @@ h3 {
     flex-direction: column;
 }
 
+/* home */
+.home-container {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    gap: 2rem;
+}
 
-/* lista productos */
+.home-container ul {
+    border: 1px solid #ddd;
+    padding: 1rem;
+
+}
+
+.home-container ul li {
+    margin-bottom: 5px;
+}
+
+.home-container img {
+    padding: 1rem 0;
+}
+
+
+
+
+/* realtimeproducts lista productos */
 .lista-container {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
+    border: 1px solid #ddd;
+
 }
 
 .lista-detalles {
@@ -63,13 +89,14 @@ h3 {
     background-color: rgb(19, 19, 19);
     color: white;
     text-align: center;
+
+
 }
 
 .lista-detalles li {
     padding: 1rem;
     letter-spacing: 0.5px;
     background-color: rgb(30, 30, 30);
-    border: 1px solid #323232;
 }
 
 .lista-productos {
@@ -80,7 +107,7 @@ h3 {
 .lista-productos li {
     padding: 0.5rem;
     background-color: rgb(245, 245, 245);
-    border-bottom: 1px solid #ddd;
+
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -97,10 +124,7 @@ h3 {
     height: auto;
     display: block;
     margin: 0 auto;
-    /* Centra la imagen horizontalmente */
     border: 2px solid #ccc;
-    /* Agrega un borde */
-
 }
 
 li img {

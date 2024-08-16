@@ -31,5 +31,16 @@
         "code": "SKU5",
         "id": 5,
         "status": true
+    },
+    {
+        "title": "Notebook NSX Epsilon",
+        "category": "Electrónicos",
+        "description": "Notebook NSX Epsilon con procesador Intel i7, 16GB RAM, 512GB SSD",
+        "price": 120000,
+        "file": "/static/assets/img/1723829113450-size515-151244-01.webp",
+        "stock": 23,
+        "code": "SKU6",
+        "id": 6,
+        "status": true
     }
 ]
