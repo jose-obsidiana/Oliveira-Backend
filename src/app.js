@@ -3,7 +3,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const uploader = require('./utils/multer.js');
 const path = require('path');
-const { initializeSocket } = require('./socket.js'); // Importa la función de inicialización de Socket.io
+const { initializeSocket } = require('./socket.js');
 
 const productsRoutes = require('./routes/productsRoutes.js');
 const cartsRoutes = require('./routes/cartsRoutes.js');
@@ -49,4 +49,4 @@ const httpServer = app.listen(PORT, () => {
 // Inicializa Socket.io
 initializeSocket(httpServer);
 
-module.exports = { app }; // Solo exporta app
+module.exports = { app }; //  exporta la app
