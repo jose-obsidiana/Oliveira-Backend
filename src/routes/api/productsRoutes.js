@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const ProductManager = require('../managers/productsManagers.js')
+const ProductManager = require('../../daos/FILESYSTEM/productsManagers.js')
+const userModel = require('../../models/usersModel.js')
 
 const router = Router();
 const productos = new ProductManager('./dbJson/products.json')
@@ -7,6 +8,7 @@ const productos = new ProductManager('./dbJson/products.json')
 
 
 router.get('/', async (req, res) => {
+
 
     try {
         const mostrarLista = await productos.getProducts();

@@ -75,7 +75,7 @@ socket.on('listaProducts', (data) => {
                 <li>${prod.title}</li>
                 <li>${prod.category}</li>
                 <li>${prod.description}</li>
-                <li>${prod.price}</li>
+                <li>$${prod.price}</li>
                 <li>${prod.stock}</li>
                 <li>${prod.code}</li>
                 <li>${prod.id}</li>

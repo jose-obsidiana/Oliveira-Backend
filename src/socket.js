@@ -1,7 +1,7 @@
 // socket.js
 const { Server } = require('socket.io');
 const fs = require('fs');
-const ProductManager = require('./managers/productsManagers.js'); // Asegúrate de que esta ruta sea correcta
+const ProductManager = require('./daos/FILESYSTEM/productsManagers.js'); // Asegúrate de que esta ruta sea correcta
 
 const productManager = new ProductManager('./dbJson/products.json');
 let io;

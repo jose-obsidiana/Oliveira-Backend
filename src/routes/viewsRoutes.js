@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const ProductManager = require('../managers/productsManagers.js');
+const ProductManager = require('../daos/FILESYSTEM/productsManagers.js');
 const uploader = require("../utils/multer.js");
 
 const router = Router();

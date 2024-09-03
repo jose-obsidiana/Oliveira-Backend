@@ -1,8 +1,8 @@
 // realTimeProducts.js
 const { Router } = require('express');
-const ProductManager = require('../managers/productsManagers.js');
-const uploader = require('../utils/multer.js');
-const { getIo } = require('../socket.js'); // Importa getIo desde socket.js
+const ProductManager = require('../../daos/FILESYSTEM/productsManagers.js');
+const uploader = require('../../utils/multer.js');
+const { getIo } = require('../../socket.js'); // Importa getIo desde socket.js
 
 const productManager = new ProductManager('./dbJson/products.json');
 const router = Router();

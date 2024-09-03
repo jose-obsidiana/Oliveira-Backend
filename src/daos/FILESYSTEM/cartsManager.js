@@ -1,5 +1,5 @@
 const fs = require("fs");
-const ProductManager = require('../managers/productsManagers.js')
+const ProductManager = require('./productsManagers.js')
 
 const productManager = new ProductManager('./dbJson/products.json')
 

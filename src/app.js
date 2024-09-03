@@ -4,13 +4,13 @@ const handlebars = require('express-handlebars');
 const uploader = require('./utils/multer.js');
 const path = require('path');
 const { initializeSocket } = require('./socket.js');
+const connectDB = require('./config/index.js')
+const appRouter = require('./routes/index.js')
 
-const productsRoutes = require('./routes/productsRoutes.js');
-const cartsRoutes = require('./routes/cartsRoutes.js');
-const viewsRoutes = require('./routes/viewsRoutes.js');
-const realTimeProducts = require('./routes/realTimeProducts.js');
 
-const ProductManager = require('./managers/productsManagers.js');
+
+
+const ProductManager = require('./daos/FILESYSTEM/productsManagers.js');
 const productManager = new ProductManager('./dbJson/products.json');
 
 const app = express();
@@ -20,10 +20,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/static', express.static(path.join(__dirname, 'public')));  // Agrega una ruta para dar seguridad a la carpeta public
 
+app.use(appRouter)
+
+
 // Configuración del motor de plantillas Handlebars
 app.engine('handlebars', handlebars.engine());
 app.set('views', path.join(__dirname, 'views')); // Usa path.join para mayor consistencia
 app.set('view engine', 'handlebars');
+
+// userModel
+connectDB()
 
 // Multer
 app.post('/upload', uploader.single('myFile'), (req, res) => {
@@ -36,11 +42,7 @@ app.post('/upload', uploader.single('myFile'), (req, res) => {
     }
 });
 
-// Endpoints
-app.use('/', viewsRoutes);
-app.use('/realtimeproducts', realTimeProducts);
-app.use('/api/products', productsRoutes);
-app.use('/api/carts', cartsRoutes);
+
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en puerto ${PORT}`);
