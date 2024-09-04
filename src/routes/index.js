@@ -7,6 +7,7 @@ const viewsRoutes = require('./viewsRoutes.js');
 const realTimeProducts = require('./api/realTimeProducts.js');
 const usersRoutes = require('./api/usersRoutes.js')
 const productsRoutesMongo = require('./mongo/productsRoutes.mongo.js')
+const cartsRoutesMongo = require('./mongo/cartsRoutes.mongo.js')
 
 
 const router = Router()
@@ -19,6 +20,7 @@ router.use('/api/products', productsRoutes);
 router.use('/api/carts', cartsRoutes);
 router.use('/api/users', usersRoutes)
 router.use('/mongo/products', productsRoutesMongo)
+router.use('/mongo/carts', cartsRoutesMongo)
 
 
 

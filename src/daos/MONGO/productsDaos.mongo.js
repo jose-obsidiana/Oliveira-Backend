@@ -20,7 +20,7 @@ class ProductDaosMongo {
             return await this.model.findOne({ _id: id });
         } catch (error) {
             console.error('Error al obtener el producto por ID:', error);
-            throw error;
+            throw Error;
         }
     }
 

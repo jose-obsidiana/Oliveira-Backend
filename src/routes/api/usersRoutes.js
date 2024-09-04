@@ -6,8 +6,8 @@ const router = Router()
 
 router.get('/', async (req, res) => {
 
-    const users = await userModel.find()
-
+    const users = await userModel.find({ first_name: "Celia" }).explain("executionsStats")
+    console.log(users)
     res.send({ status: 'success', payload: users })
 })
 

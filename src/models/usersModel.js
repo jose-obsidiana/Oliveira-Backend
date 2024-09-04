@@ -6,15 +6,21 @@ const userCollection = 'users';
 const userSchema = new Schema({
     first_name: {
         type: String,
-        required: true
+        required: true,
     },
-    last_name: String,
+    last_name: {
+        type: String,
+        required: true,
+        index: true  // Con esto especifico que last_name va a estar indexado
+    },
     username: String,
     email: {
         type: String,
         required: true,
-        unique: true
-    }
+        unique: true,
+        index: true
+    },
+    gender: String
 })
 
 
