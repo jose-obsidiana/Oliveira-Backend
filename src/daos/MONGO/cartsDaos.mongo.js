@@ -10,7 +10,10 @@ class CartDaosMongo {
 
     getCartById = async (id) => {
         try {
-            return await this.model.findOne({ _id: id })
+            //const cart = await this.model.findOne({ _id: id });
+            const cart = await this.model.findById(id).populate('products.product');
+
+            return cart
         } catch (error) {
             console.log('No se puede obtener el carrito seleccionado')
             throw new Error;
@@ -26,24 +29,50 @@ class CartDaosMongo {
         }
     }
 
-    updateCart = async (id, _id, quantity) => {
-        const cartMongo = await this.getCartById(id)
+    createProductToCart = async (id, _id, quantity) => {
+        // Obtén el carrito por su ID
+        const cartMongo = await this.getCartById(id);
 
         if (!cartMongo) {
-            return console.log('No se encuentra el carrito al que quiere acceder')
+            throw new Error('No se encuentra el carrito al que quiere acceder');
         }
 
-        const existProduct = cartMongo.products.find(prod => prod.product.toString() === _id)
-
+        const productId = _id.toString();
+        // Encuentra el producto en el carrito
+        const existProduct = cartMongo.products.find(prod => prod.product && prod.product.toString() === productId);
         if (existProduct) {
-            existProduct.quantity = + quantity
+            // Si el producto ya existe, actualiza su cantidad
+            existProduct.quantity += +quantity;
+        } else {
+            // Si el producto no existe, agrégalo al carrito con la cantidad
+            cartMongo.products.push({ product: _id, quantity: +quantity });
         }
 
-        cartMongo.products.push({ product: _id, quantity })
-        const updateCart = await this.model.findByIdAndUpdate({ _id: id }, cartMongo)
+        // Actualiza el carrito en la base de datos
+        const updateCart = await this.model.findByIdAndUpdate(id, { products: cartMongo.products }, { new: true });
+        return updateCart;
+    };
 
-        return updateCart
-    }
+
+    // updatedCart = async (id, _id, quantity) => {
+    //     const cartMongo = await this.getCartById(id)
+
+    //     if (!cartMongo) {
+    //         throw new Error('No se encuentra el carrito al que quiere acceder')
+    //     }
+
+    //     const productId = _id.toString();
+    //     const existProduct = cartMongo.products.find(prod => prod.product && prod.product.toString() === productId);
+    //     if (existProduct) {
+    //         existProduct.quantity = +quantity;
+    //     }
+    //     else {
+    //         cartMongo.products.push({ product: _id, quantity: +quantity })
+    //     }
+
+    //     const updateCart = await this.model.findByIdAndUpdate(id, { products: cartMongo.products }, { new: true })
+    //     return updateCart
+    // }
 
 
     deleteCart = async () => { }

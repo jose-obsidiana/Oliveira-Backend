@@ -1,0 +1,13 @@
+<main>
+    <h1>Carrito</h1>
+
+
+    {{#each products}}
+    <ul>
+        <li>{{this.product.title}} - producto</li>
+        <li><img src="{{this.product.file}}" alt="{{this.product.title}}"></li>
+        <li>{{this.product.price}} - precio</li>
+        <li>{{this.quantity}} - cantidad</li>
+    </ul>
+    {{/each}}
+</main>
