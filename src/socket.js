@@ -18,7 +18,7 @@ function initializeSocket(server) {
 
         socket.on('nuevoProducto', async (data) => {
             try {
-                await productService.createProduct(data.title, data.category, data.description, data.price, data.file, data.stock);
+                await productService.createProduct(data.title, data.category, data.description, data.price, data.file, data.stock, data.code);
                 const updatedProducts = await productService.getProducts();
                 io.emit('listaProducts', updatedProducts);
             } catch (error) {

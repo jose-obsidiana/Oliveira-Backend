@@ -27,6 +27,8 @@ buttonEnviar.addEventListener('click', async (event) => {
     formData.append('price', parseFloat(price.value))
     formData.append('stock', parseInt(stock.value))
     formData.append('myFile', myFile.files[0])
+    formData.append('code', code.value.trim())
+
 
     try {
         const response = await fetch('/upload', {
@@ -78,7 +80,6 @@ socket.on('listaProducts', (data) => {
                 <li>$${prod.price}</li>
                 <li>${prod.stock}</li>
                 <li>${prod.code}</li>
-                <li>${prod.id}</li>
             </ul>
         </div>
         `
