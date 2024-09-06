@@ -52,10 +52,11 @@ h3 {
 
 /* home */
 .home-container {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     text-align: center;
     gap: 2rem;
+    margin-bottom: 4rem;
 }
 
 .home-container ul {
@@ -173,5 +174,9 @@ li img {
     background-color: rgb(245, 245, 245);
     border-radius: 5px;
     border: 2px solid rgb(71, 71, 71);
+}
 
+/* pagination */
+.container-pages {
+    text-align: center;
 }

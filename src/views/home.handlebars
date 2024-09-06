@@ -16,16 +16,20 @@
         {{/each}}
     </div>
 
+    <div class="container-pages">
+        {{#if hasPrevPage}}
+        <a href="/?page={{prevPage}}">Anterior</a>
+        {{/if}}
 
-    {{#if hasPrevPage}}
-    <a href="/?page={{prevPage}}">Anterior</a>
-    {{/if}}
+        {{#if hasNextPage}}
+        <a href="/?page={{nextPage}}">Siguiente</a>
+        {{/if}}
 
-    {{#if hasNextPage}}
-    <a href="/?page={{nextPage}}">Siguiente</a>
-    {{/if}}
+        <br>
+        <p>Página {{currentPage}} de {{totalPages}}</p>
+        <br>
+    </div>
 
-    <p>Página {{currentPage}} de {{totalPages}}</p>
 
     {{else}}
     <h2>No tienes acceso para ver los productos</h2>
