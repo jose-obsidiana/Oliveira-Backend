@@ -12,7 +12,7 @@ const productService = new ProductDaosMongo()
 
 router.get('/', uploader.single('myFile'), async (req, res) => {
     let filePath = '';
-    let limit = 2;
+    let limit = 8;
     let page = req.query.page || 1;
 
     if (req.file) {
