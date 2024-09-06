@@ -26,17 +26,17 @@
                 <label for="stock">Stock </label>
                 <input type="number" name="stock" id="stock" required>
             </div>
-            {{!-- <div class="flex-column">
+            <div class="flex-column">
                 <label for="code">Code </label>
                 <input type="text" name="stock" id="code" required>
-            </div> --}}
+            </div>
 
             <div class="flex-column">
                 <label for="myFile">Imagen</label>
                 <input type="file" name="myFile" id="myFile" required>
             </div>
 
-            <button type="submit" id="enviar" class="buttonEnviar">enviar</button>
+            <button type="button" id="enviar" class="buttonEnviar">enviar</button>
         </form>
     </section>
 
@@ -69,6 +69,6 @@
 
 
 <script src="/socket.io/socket.io.js"></script>
-<script src="/path/to/realtime.js"></script>
+<!--<script src="/path/to/realtime.js"></script> 
 <!-- para saber si está bien importada la libreria: socket.io/socket.io.js !-->
 <script src="/static/assets/js/realtime.js"></script>

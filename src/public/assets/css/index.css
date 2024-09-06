@@ -72,6 +72,13 @@ h3 {
     padding: 1rem 0;
 }
 
+/* buttons*/
+.button-page {
+    font-size: 5rem;
+    width: 5rem;
+    background-color: black;
+}
+
 
 
 

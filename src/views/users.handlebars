@@ -1,0 +1,24 @@
+<h1>Usuarios</h1>
+
+
+
+<ul>
+    {{#each users}}
+    <li>{{this.first_name}}</li>
+    <li>{{this.last_name}}</li>
+    <li>{{this.email}}</li>
+    <li>{{this.gender}}</li>
+    <br>
+
+    {{/each}}
+</ul>
+
+{{#if hasPrevPage}}
+<a class="button-page" href="/api/users?page={{prevPage}}">Página anterior</a>
+{{/if}}
+
+{{#if hasNextPage}}
+<a href="/api/users?page={{nextPage}}">Página Siguiente</a>
+{{/if}}
+
+<p>Página {{currentPage}} de {{totalPages}}</p>

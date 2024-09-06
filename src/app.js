@@ -8,11 +8,6 @@ const connectDB = require('./config/index.js')
 const appRouter = require('./routes/index.js')
 
 
-
-
-const ProductManager = require('./daos/FILESYSTEM/productsManagers.js');
-const productManager = new ProductManager('./dbJson/products.json');
-
 const app = express();
 const PORT = 8080;
 
@@ -24,9 +19,10 @@ app.use(appRouter)
 
 
 // Configuración del motor de plantillas Handlebars
-app.engine('handlebars', handlebars.engine());
-app.set('views', path.join(__dirname, 'views')); // Usa path.join para mayor consistencia
-app.set('view engine', 'handlebars');
+// motor de plantillas
+app.engine('handlebars', handlebars.engine())
+app.set('views', __dirname + '/views')
+app.set('view engine', 'handlebars')
 
 // userModel
 connectDB()

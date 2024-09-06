@@ -1,9 +1,9 @@
-const productModel = require('../../models/productsModel.js')
+const productModel = require('../../models/productModel.js')
 const mongoose = require('mongoose')
 
 class ProductDaosMongo {
     constructor() {
-        this.model = productModel
+        this.model = productModel;
     }
 
     getProducts = async () => {
@@ -24,9 +24,26 @@ class ProductDaosMongo {
         }
     }
 
-    createProduct = async (newProduct) => {
-        await this.model.create(newProduct)
+    async createProduct(newProduct) {
+        try {
+            // Verifica si el producto ya existe
+            const exists = await this.model.findOne({ code: newProduct.code });
+
+            if (exists) {
+                throw new Error(`El producto con el código ${newProduct.code} ya existe`);
+            }
+
+            // Crea el nuevo producto
+            const product = await this.model.create(newProduct);
+            console.log('Producto agregado correctamente:', product);
+            return product;
+        } catch (error) {
+            console.error('Error al agregar producto:', error);
+            throw error;
+        }
     }
+
+
 
     updateProduct = async (_id) => {
         await this.model.updateOne(_id)

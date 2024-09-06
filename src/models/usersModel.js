@@ -1,4 +1,6 @@
 const { Schema, model } = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
+
 
 const userCollection = 'users';
 
@@ -23,6 +25,7 @@ const userSchema = new Schema({
     gender: String
 })
 
+userSchema.plugin(mongoosePaginate)
 
 
 const userModel = model(userCollection, userSchema)

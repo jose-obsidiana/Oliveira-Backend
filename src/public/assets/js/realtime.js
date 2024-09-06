@@ -17,7 +17,7 @@ const myFile = document.querySelector('#myFile')
 
 
 
-form.addEventListener('submit', async (event) => {
+buttonEnviar.addEventListener('click', async (event) => {
     event.preventDefault()
 
     let formData = new FormData()
@@ -44,7 +44,7 @@ form.addEventListener('submit', async (event) => {
                 description: description.value.trim(),
                 price: parseFloat(price.value),
                 stock: parseInt(stock.value),
-                // code: code.value.trim(),
+                code: code.value.trim(),
                 file: result.file
             }
 

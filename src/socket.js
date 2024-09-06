@@ -1,9 +1,9 @@
 // socket.js
 const { Server } = require('socket.io');
 const fs = require('fs');
-const ProductManager = require('./daos/FILESYSTEM/productsManagers.js'); // Asegúrate de que esta ruta sea correcta
+const ProductDaosMongo = require('./daos/MONGO/productsDaos.mongo'); // Asegúrate de que esta ruta sea correcta
 
-const productManager = new ProductManager('./dbJson/products.json');
+const productService = new ProductDaosMongo()
 let io;
 
 function initializeSocket(server) {
@@ -12,14 +12,14 @@ function initializeSocket(server) {
     io.on('connection', (socket) => {
         console.log('Nuevo usuario conectado');
 
-        productManager.getProducts().then((result) => {
+        productService.getProducts().then((result) => {
             socket.emit('listaProducts', result);
         });
 
         socket.on('nuevoProducto', async (data) => {
             try {
-                await productManager.addProduct(data.title, data.category, data.description, data.price, data.file, data.stock);
-                const updatedProducts = await productManager.getProducts();
+                await productService.createProduct(data.title, data.category, data.description, data.price, data.file, data.stock);
+                const updatedProducts = await productService.getProducts();
                 io.emit('listaProducts', updatedProducts);
             } catch (error) {
                 console.error('Error al agregar producto:', error);
