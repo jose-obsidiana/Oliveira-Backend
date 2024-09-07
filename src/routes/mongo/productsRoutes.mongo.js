@@ -45,10 +45,16 @@ router.post('/', async (req, res) => {
 
     try {
         const { body } = req
+        // const { title, category, description, price, stock, code, file } = req.body
         const createProduct = await productService.createProduct(body)
+
+        // if (!title || !category || !description || !price || !stock || !code || !file) {
+        //     res.status(400).send({ status: 'error', message: 'Es necesario completar todos los campos' })
+        // }
+
         res.send({ status: 'success', payload: createProduct, message: 'Producto creado correctamente' })
     } catch (error) {
-        res.status(400).send({ status: 'error', message: 'No se puede crear el producto ' })
+        res.status(400).send({ status: 'error', message: 'No se puede crear el producto ', error })
     }
 })
 

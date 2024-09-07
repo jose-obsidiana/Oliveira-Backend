@@ -18,7 +18,7 @@ const router = Router()
 router.use('/', viewsRoutesMongo);
 router.use('/realtimeproducts', realTimeProductsMongo);
 router.use('/mongo/products', productsRoutesMongo)
-router.use('/mongo/carts', cartsRoutesMongo)
+router.use('/carts', cartsRoutesMongo)
 // router.use('/api/products', productsRoutes);
 // router.use('/api/carts', cartsRoutes);
 // router.use('/api/users', usersRoutes)

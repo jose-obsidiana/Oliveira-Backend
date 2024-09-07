@@ -10,8 +10,9 @@ router.get('/:cid', async (req, res) => {
 
     const { cid } = req.params
     const cart = await cartService.getCartById(cid);
-    console.log('Carrito obtenido:', cart);
-    console.log(JSON.stringify(cart, null, 2))
+
+    console.log('Carrito obtenido:', JSON.stringify(cart, null, 2));
+
 
     const cartMap = cart.products.map(prod => {
         const { _id, ...rest } = prod.toObject();
@@ -43,18 +44,18 @@ router.post('/', async (req, res) => {
     res.send({ status: 'success', postCart })
 })
 
-router.put('/:cid/products/:pid', async (req, res) => {
+router.post('/:cid/products/:pid', async (req, res) => {
 
     try {
         const { cid, pid } = req.params
         const { quantity } = req.body
 
-        if (isNaN(quantity) || quantity <= 0) {
-            return res.status(400).send({ status: 'error', message: 'Cantidad inválida' });
-        }
+        // if (isNaN(quantity)) {
+        //     return res.status(400).send({ status: 'error', message: 'Cantidad inválida' });
+        // }
 
 
-        const updatedCart = await cartService.createProductToCart(cid, pid, quantity);
+        const updatedCart = await cartService.createProductToCart(cid, pid, Number(quantity));
         if (!updatedCart) {
             return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
         }
