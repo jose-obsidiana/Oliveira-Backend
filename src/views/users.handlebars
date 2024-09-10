@@ -1,13 +1,13 @@
 <h1>Usuarios</h1>
 
-
+<div>
+    <input type="text" id="chatbox">
+</div>
 
 <ul>
     {{#each users}}
-    <li>{{this.first_name}}</li>
-    <li>{{this.last_name}}</li>
-    <li>{{this.email}}</li>
-    <li>{{this.gender}}</li>
+    <li>Bienvenid@ {{this.first_name}}</li>
+
     <br>
 
     {{/each}}

@@ -10,6 +10,9 @@ const productService = new ProductDaosMongo()
 
 
 
+
+
+
 router.get('/', uploader.single('myFile'), async (req, res) => {
     let filePath = '';
     let limit = 8;
@@ -20,9 +23,11 @@ router.get('/', uploader.single('myFile'), async (req, res) => {
         res.json({ file: filePath, message: 'Archivo subido con éxito' })
     }
 
+
+    const { user } = req.body
+
     const userLogin = {
-        full_name: 'Jose Oliveira',
-        role: 'admin'
+        username: user
     }
 
     try {
@@ -43,7 +48,7 @@ router.get('/', uploader.single('myFile'), async (req, res) => {
             title: 'Home',
             style: 'index.css',
             user: userLogin,
-            isAdmin: userLogin.role === 'admin',
+            isUser: userLogin.username === user,
             filePath,
             products: productMap,
             hasPrevPage: products.hasPrevPage,

@@ -39,9 +39,27 @@ router.get('/:cid', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+
     const { body } = req
-    const postCart = await cartService.createCart(body)
-    res.send({ status: 'success', postCart })
+    const { user } = body
+
+
+    if (!user) {
+        return res.status(400).send({ status: 'error', message: 'No se puede crear carrito porque no se genera un usuario' })
+    }
+
+    try {
+        const postCart = await cartService.createCart(body)
+
+        const userLogin = {
+            username: user
+        }
+        console.log('carrito creado correctamente')
+        res.json({ status: 'success', userLogin, postCart });
+    } catch (error) {
+        res.send({ status: 'error', message: 'Error al intentar crear un carrito', error })
+    }
+
 })
 
 router.post('/:cid/products/:pid', async (req, res) => {

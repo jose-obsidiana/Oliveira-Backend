@@ -33,37 +33,29 @@ class CartDaosMongo {
 
 
     createProductToCart = async (cartId, productId, quantity) => {
-        // Obtén el carrito por su ID
+
         const cartMongo = await cartModel.findById(cartId);
         if (!cartMongo) {
             throw new Error('No se encuentra el carrito al que quiere acceder');
         }
 
-        // Verifica si quantity es un número válido
+        if (!mongoose.isValidObjectId(productId)) {
+            throw new Error('El ID del producto no es válido');
+        }
+
+        const existProduct = cartMongo.products.find(item => item.product._id.toString() === productId.toString());
+
         const validQuantity = Number(quantity);
         if (isNaN(validQuantity) || validQuantity <= 0) {
             throw new Error('La cantidad proporcionada no es válida');
         }
 
-        // Asegúrate de que productId sea un ObjectId válido
-        if (!mongoose.isValidObjectId(productId)) {
-            throw new Error('El ID del producto no es válido');
-        }
-
-        // Verifica si el producto ya existe en el carrito
-        const existProduct = cartMongo.products.find(item =>
-            item.product._id.toString() === productId.toString() // Comparar ObjectId como cadenas
-        );
-
         if (existProduct) {
-            // Si el producto ya existe, aumenta la cantidad
             existProduct.quantity += validQuantity;
         } else {
-            // Si el producto no existe, lo agrega al carrito
             cartMongo.products.push({ product: productId, quantity: validQuantity });
         }
 
-        // Guarda el carrito actualizado en la base de datos
         const updatedCart = await cartMongo.save();
         return updatedCart;
     };
