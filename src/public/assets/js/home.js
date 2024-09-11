@@ -48,9 +48,8 @@ addToCart.addEventListener('click', async (event) => {
         return;
     }
 
-
     try {
-        const response = await fetch(`/${cartId}/products/${productId}`, {
+        const response = await fetch(`/carts/${cartId}/products/${productId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

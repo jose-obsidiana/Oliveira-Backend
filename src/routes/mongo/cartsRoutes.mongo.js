@@ -67,7 +67,7 @@ router.post('/:cid/products/:pid', async (req, res) => {
         const { cid, pid } = req.params
         const { quantity, productId } = req.body
 
-        const updatedCart = await cartService.createProductToCart(cid, pid, Number(quantity), cartId, productId);
+        const updatedCart = await cartService.createProductToCart(cid, pid, Number(quantity), productId);
 
         if (!updatedCart) {
             return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
