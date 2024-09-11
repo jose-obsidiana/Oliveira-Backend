@@ -28,7 +28,6 @@ router.get('/:cid', async (req, res) => {
             title: 'Cart',
             products: cartMap,
             style: 'index.css'
-
         });
 
     } catch (error) {
