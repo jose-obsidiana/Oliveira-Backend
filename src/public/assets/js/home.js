@@ -1,7 +1,7 @@
 
 let user;
 
-const addToCart = document.querySelector('#addToCart')
+const addToCartButtons = document.querySelectorAll('.addToCart')
 
 Swal.fire({
     title: '¡Identifícate!',
@@ -38,32 +38,33 @@ Swal.fire({
             });
     }
 });
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', async (event) => {
+        const productId = event.target.getAttribute('data-product-id')
+        const cartId = localStorage.getItem('cartId')
 
-addToCart.addEventListener('click', async (event) => {
-    const productId = event.target.getAttribute('data-product-id')
-    const cartId = localStorage.getItem('cartId')
-
-    if (!cartId) {
-        console.error('No se encontró el cartId en el localStorage');
-        return;
-    }
-
-    try {
-        const response = await fetch(`/carts/${cartId}/products/${productId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ quantity: 1, productId: productId })
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al agregar el producto al carrito');
+        if (!cartId) {
+            console.error('No se encontró el cartId en el localStorage');
+            return;
         }
 
-        const data = await response.json();
-        console.log('Producto agregado al carrito:', data);
-    } catch (error) {
-        console.error('Error al agregar producto al carrito:', error);
-    }
+        try {
+            const response = await fetch(`/carts/${cartId}/products/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ quantity: 1, productId: productId })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al agregar el producto al carrito');
+            }
+
+            const data = await response.json();
+            console.log('Producto agregado al carrito:', data);
+        } catch (error) {
+            console.error('Error al agregar producto al carrito:', error);
+        }
+    })
 })
