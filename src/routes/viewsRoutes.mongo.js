@@ -34,7 +34,7 @@ router.get('/', uploader.single('myFile'), async (req, res) => {
         const products = await productModel.paginate({}, { limit, page })
 
         const productMap = products.docs.map(prod => {
-            const { _id, ...rest } = prod.toObject();
+            const { ...rest } = prod.toObject();
             return rest;
         })
 

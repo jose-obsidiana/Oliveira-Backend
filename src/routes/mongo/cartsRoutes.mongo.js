@@ -43,7 +43,6 @@ router.post('/', async (req, res) => {
     const { body } = req
     const { user } = body
 
-
     if (!user) {
         return res.status(400).send({ status: 'error', message: 'No se puede crear carrito porque no se genera un usuario' })
     }
@@ -66,14 +65,10 @@ router.post('/:cid/products/:pid', async (req, res) => {
 
     try {
         const { cid, pid } = req.params
-        const { quantity } = req.body
+        const { quantity, productId } = req.body
 
-        // if (isNaN(quantity)) {
-        //     return res.status(400).send({ status: 'error', message: 'Cantidad inválida' });
-        // }
+        const updatedCart = await cartService.createProductToCart(cid, pid, Number(quantity), cartId, productId);
 
-
-        const updatedCart = await cartService.createProductToCart(cid, pid, Number(quantity));
         if (!updatedCart) {
             return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
         }

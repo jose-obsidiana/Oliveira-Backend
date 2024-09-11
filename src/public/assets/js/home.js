@@ -1,8 +1,7 @@
 
-console.log('Hola desde home')
-
 let user;
-let chatbox = document.querySelector('#chatbox');
+
+const addToCart = document.querySelector('#addToCart')
 
 Swal.fire({
     title: '¡Identifícate!',
@@ -31,10 +30,41 @@ Swal.fire({
                 return response.json();
             })
             .then(data => {
-                console.log('Usuario guardado en el servidor:', data);
+                localStorage.setItem('cartId', data.postCart._id)
+                console.log('Cart ID guardado en el localStorage:', data.postCart._id);
             })
             .catch(error => {
                 console.error('Error al enviar el nombre de usuario:', error);
             });
     }
 });
+
+addToCart.addEventListener('click', async (event) => {
+    const productId = event.target.getAttribute('data-product-id')
+    const cartId = localStorage.getItem('cartId')
+
+    if (!cartId) {
+        console.error('No se encontró el cartId en el localStorage');
+        return;
+    }
+
+
+    try {
+        const response = await fetch(`/${cartId}/products/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ quantity: 1, productId: productId })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al agregar el producto al carrito');
+        }
+
+        const data = await response.json();
+        console.log('Producto agregado al carrito:', data);
+    } catch (error) {
+        console.error('Error al agregar producto al carrito:', error);
+    }
+})
