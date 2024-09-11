@@ -2,6 +2,7 @@
 let user;
 
 const addToCartButtons = document.querySelectorAll('.addToCart')
+const verCarrito = document.querySelector('#verCarrito')
 
 Swal.fire({
     title: '¡Identifícate!',
@@ -38,6 +39,8 @@ Swal.fire({
             });
     }
 });
+
+
 addToCartButtons.forEach(button => {
     button.addEventListener('click', async (event) => {
         const productId = event.target.getAttribute('data-product-id')
@@ -67,4 +70,14 @@ addToCartButtons.forEach(button => {
             console.error('Error al agregar producto al carrito:', error);
         }
     })
+})
+
+verCarrito.addEventListener('click', async (e) => {
+    e.preventDefault()
+    const cartId = localStorage.getItem('cartId')
+    if (cartId) {
+        window.location.href = `/carts/${cartId}`;
+    } else {
+        alert('No hay carrito creado aún.');
+    }
 })
