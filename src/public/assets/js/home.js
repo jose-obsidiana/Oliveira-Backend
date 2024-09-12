@@ -4,6 +4,7 @@ let user;
 const addToCartButtons = document.querySelectorAll('.addToCart')
 const verCarrito = document.querySelector('#verCarrito')
 
+
 window.onload = function () {
     const username = localStorage.getItem('username')
 
@@ -91,3 +92,4 @@ verCarrito.addEventListener('click', async (e) => {
         alert('No hay carrito creado aún.');
     }
 })
+

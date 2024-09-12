@@ -39,11 +39,13 @@ class CartDaosMongo {
             throw new Error('No se encuentra el carrito al que quiere acceder');
         }
 
+        console.log('Carrito obtenido:', JSON.stringify(cartMongo, null, 2));
+
         if (!mongoose.isValidObjectId(productId)) {
             throw new Error('El ID del producto no es válido');
         }
 
-        const existProduct = cartMongo.products.find(item => item.product._id.toString() === productId.toString());
+        const existProduct = cartMongo.products.find(item => item.product.toString() === productId.toString());
 
         const validQuantity = Number(quantity);
         if (isNaN(validQuantity) || validQuantity <= 0) {
@@ -86,27 +88,41 @@ class CartDaosMongo {
 
 
     deleteProductToCart = async (cartId, productId) => {
-        const cart = await cartModel.findById(cartId)
-
         try {
-            if (!cart) {
-                return console.log('No se encuentra el carrito al que desea acceder')
+
+            const cartMongo = await cartModel.findById(cartId);
+            if (!cartMongo) {
+                console.log('No se encuentra el carrito');
+                throw new Error('No se encuentra el carrito al que quiere acceder');
             }
 
-            const productIndex = cart.products.findIndex(item => item.product._id.equals(productId));
+            if (!mongoose.isValidObjectId(productId)) {
+                throw new Error('El ID del producto no es válido');
+            }
+
+            console.log('Carrito encontrado:', cartMongo);
+            console.log('ID del producto recibido:', productId);
+
+            const productIndex = cartMongo.products.findIndex(item =>
+                item.product._id.toString() === productId.toString() // Comparar con el productId correctamente
+            );
 
             if (productIndex === -1) {
+                console.log('Producto no encontrado en el carrito');
                 throw new Error('No se encuentra el producto que desea eliminar');
             }
 
-            cart.products.splice(productIndex, 1)
-            const resultado = await cart.save()
-            return resultado
-        } catch (error) {
-            console.log('Error al intentar eliminar producto:', error)
-        }
+            cartMongo.products.splice(productIndex, 1);
+            const updatedCart = await cartMongo.save();
+            console.log('Carrito actualizado:', updatedCart);
+            return updatedCart;
 
+        } catch (error) {
+            console.error('Error en deleteProductToCart:', error);
+            throw error;
+        }
     }
+
 }
 
 module.exports = CartDaosMongo

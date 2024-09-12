@@ -1,8 +1,6 @@
 <main>
     <h1>Carrito</h1>
 
-
-
     <div class="lista-container cart-container">
         <ul class="lista-detalles ">
             <li>Img</li>
@@ -19,11 +17,14 @@
             <li>{{this.product.title}}</li>
             <li>${{this.product.price}}</li>
             <li>{{this.quantity}}</li>
-            <li><button>Eliminar</button></li>
+            <li>{{this.product._id}}</li>
+
+
+            <button class="deleteProductButtons" data-product-id="{{this.product._id}}">Eliminar</button>
         </ul>
     </div>
     {{/each}}
 
-
-
 </main>
+
+<script src="/static/assets/js/carts.js"></script>

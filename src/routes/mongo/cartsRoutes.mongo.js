@@ -15,7 +15,7 @@ router.get('/:cid', async (req, res) => {
 
 
     const cartMap = cart.products.map(prod => {
-        const { _id, ...rest } = prod.toObject();
+        const { ...rest } = prod.toObject();
         return rest;
     })
 
@@ -83,15 +83,15 @@ router.delete('/:cid/products/:pid', async (req, res) => {
 
     try {
         const { cid, pid } = req.params
+        console.log('Llamando a deleteProductToCart con:', cid, pid);
 
         const deleteProduct = await cartService.deleteProductToCart(cid, pid)
 
         if (!deleteProduct) {
-            return res.status(400).send({ status: 'error', message: 'El producto que desea eliminar no existe o no se encuentra disponible' })
-
+            return res.status(400).send({ status: 'error', message: 'El producto que desea eliminar no existe o no se encuentra disponible' });
         }
 
-        res.send({ status: 'succes', deleteProduct })
+        res.json({ status: 'success', message: 'Producto eliminado con éxito', deleteProduct });
     } catch (error) {
         return res.status(500).send({ status: 'error', message: 'Error al intentar eliminar producto' })
     }
