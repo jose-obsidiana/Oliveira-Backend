@@ -45,7 +45,7 @@ class CartDaosMongo {
             throw new Error('El ID del producto no es válido');
         }
 
-        const existProduct = cartMongo.products.find(item => item.product.toString() === productId.toString());
+        const existProduct = cartMongo.products.find(item => item.product._id.toString() === productId.toString());
 
         const validQuantity = Number(quantity);
         if (isNaN(validQuantity) || validQuantity <= 0) {

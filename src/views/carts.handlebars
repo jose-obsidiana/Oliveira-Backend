@@ -17,10 +17,8 @@
             <li>{{this.product.title}}</li>
             <li>${{this.product.price}}</li>
             <li>{{this.quantity}}</li>
-            <li>{{this.product._id}}</li>
 
-
-            <button class="deleteProductButtons" data-product-id="{{this.product._id}}">Eliminar</button>
+            <li><button class="deleteProductButtons" data-product-id="{{this.product._id}}">Eliminar</button></li>
         </ul>
     </div>
     {{/each}}
