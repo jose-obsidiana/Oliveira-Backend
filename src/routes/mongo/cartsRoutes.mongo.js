@@ -79,25 +79,22 @@ router.post('/:cid/products/:pid', async (req, res) => {
     }
 })
 
-// router.put('/:cid/products/:pid', async (req, res) => {
+router.delete('/:cid/products/:pid', async (req, res) => {
 
-//     try {
-//         const { cid, pid } = req.params
-//         const { quantity } = req.body
+    try {
+        const { cid, pid } = req.params
 
+        const deleteProduct = await cartService.deleteProductToCart(cid, pid)
 
-//         const updatedCart = await cartService.updatedCart(cid, pid, quantity);
-//         if (!updatedCart) {
-//             return res.status(404).send({ status: 'error', message: 'Carrito no encontrado' });
-//         }
+        if (!deleteProduct) {
+            return res.status(400).send({ status: 'error', message: 'El producto que desea eliminar no existe o no se encuentra disponible' })
 
+        }
 
-//         res.send({ status: 'success', cart: updatedCart });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send({ status: 'error', message: 'Error al actualizar el carrito', error });
-//     }
-// })
-
+        res.send({ status: 'succes', deleteProduct })
+    } catch (error) {
+        return res.status(500).send({ status: 'error', message: 'Error al intentar eliminar producto' })
+    }
+})
 
 module.exports = router

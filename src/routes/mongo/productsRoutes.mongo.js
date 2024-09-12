@@ -45,7 +45,6 @@ router.post('/', async (req, res) => {
 
     try {
         const { body } = req
-        // const { title, category, description, price, stock, code, file } = req.body
         const createProduct = await productService.createProduct(body)
 
         // if (!title || !category || !description || !price || !stock || !code || !file) {
@@ -78,7 +77,7 @@ router.delete('/:pid', async (req, res) => {
             return res.status(400).send({ status: 'error', message: 'ID no válido' });
         }
 
-        const deleteProduct = await productService.deleteProduct({ _id: pid })
+        const deleteProduct = await productService.deleteProduct(pid)
 
         if (!deleteProduct) {
             console.log('Producto no encontrado');

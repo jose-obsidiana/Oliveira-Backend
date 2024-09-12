@@ -2,12 +2,28 @@
     <h1>Carrito</h1>
 
 
+
+    <div class="lista-container cart-container">
+        <ul class="lista-detalles ">
+            <li>Img</li>
+            <li>Producto</li>
+            <li>Precio</li>
+            <li>Cantidad</li>
+            <li>Acciones</li>
+        </ul>
+    </div>
     {{#each products}}
-    <ul>
-        <li>{{this.product.title}} - producto</li>
-        <li><img src="{{this.product.file}}" alt="{{this.product.title}}"></li>
-        <li>{{this.product.price}} - precio</li>
-        <li>{{this.quantity}} - cantidad</li>
-    </ul>
+    <div class="cart-container">
+        <ul class="cart-detalles">
+            <li><img src="{{this.product.file}}" alt="{{this.product.title}}"></li>
+            <li>{{this.product.title}}</li>
+            <li>${{this.product.price}}</li>
+            <li>{{this.quantity}}</li>
+            <li><button>Eliminar</button></li>
+        </ul>
+    </div>
     {{/each}}
+
+
+
 </main>

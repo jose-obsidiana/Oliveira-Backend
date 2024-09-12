@@ -61,9 +61,22 @@ class ProductDaosMongo {
     }
 
     deleteProduct = async (_id) => {
-        return await this.model.deleteOne({ _id })
-    }
+        try {
+            const resultado = await this.model.deleteOne({ _id })
 
+            if (resultado.deletedCount === 1) {
+                console.log('Producto eliminado exitosamente');
+                return resultado;
+            } else {
+                console.log('Producto no encontrado');
+                return null;
+            }
+
+        } catch (error) {
+            console.log('Error al eliminar el producto', error);
+            return null;
+        }
+    }
 }
 
 

@@ -85,8 +85,28 @@ class CartDaosMongo {
     // }
 
 
-    deleteCart = async () => { }
+    deleteProductToCart = async (cartId, productId) => {
+        const cart = await cartModel.findById(cartId)
 
+        try {
+            if (!cart) {
+                return console.log('No se encuentra el carrito al que desea acceder')
+            }
+
+            const productIndex = cart.products.findIndex(item => item.product._id.equals(productId));
+
+            if (productIndex === -1) {
+                throw new Error('No se encuentra el producto que desea eliminar');
+            }
+
+            cart.products.splice(productIndex, 1)
+            const resultado = await cart.save()
+            return resultado
+        } catch (error) {
+            console.log('Error al intentar eliminar producto:', error)
+        }
+
+    }
 }
 
 module.exports = CartDaosMongo
