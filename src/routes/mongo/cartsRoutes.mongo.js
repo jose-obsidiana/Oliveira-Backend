@@ -79,6 +79,24 @@ router.post('/:cid/products/:pid', async (req, res) => {
     }
 })
 
+
+router.put('/:cid/products/:pid', async (req, res) => {
+    try {
+        const { cid, pid } = req.params
+        const { quantityChange } = req.body
+
+        const updatedProduct = await cartService.updatedProductToCart(cid, pid, quantityChange)
+
+        if (!updatedProduct) {
+            return res.status(400).send({ status: 'error', message: 'El producto que desea actualizar no se encuentra disponible o no existe' })
+        }
+        res.json({ status: 'soccess', message: 'Producto actualizado con éxito', updatedProduct })
+    }
+    catch (error) {
+        res.status(500).send({ status: 'error', message: "Error en el servidor, el producto no puede ser actualizado" })
+    }
+})
+
 router.delete('/:cid/products/:pid', async (req, res) => {
 
     try {

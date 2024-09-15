@@ -66,25 +66,31 @@ class CartDaosMongo {
 
 
 
-    // updatedCart = async (id, _id, quantity) => {
-    //     const cartMongo = await this.getCartById(id)
+    updatedProductToCart = async (cartId, productId, quantityChange) => {
 
-    //     if (!cartMongo) {
-    //         throw new Error('No se encuentra el carrito al que quiere acceder')
-    //     }
+        try {
+            const cart = await cartModel.findById(cartId)
+            if (!cart) {
+                throw new Error('Carrito no encontrado')
+            }
 
-    //     const productId = _id.toString();
-    //     const existProduct = cartMongo.products.find(prod => prod.product && prod.product.toString() === productId);
-    //     if (existProduct) {
-    //         existProduct.quantity = +quantity;
-    //     }
-    //     else {
-    //         cartMongo.products.push({ product: _id, quantity: +quantity })
-    //     }
+            const product = cart.products.find(prod => prod.product._id.toString() === productId.toString())
+            if (!product) {
+                throw new Error('No se encuentra el producto que quiere actualizar')
+            }
 
-    //     const updateCart = await this.model.findByIdAndUpdate(id, { products: cartMongo.products }, { new: true })
-    //     return updateCart
-    // }
+            product.quantity += quantityChange
+            if (product.quantity < 1) {
+                product.quantity = 1
+            }
+
+            await cart.save()
+            return cart
+        } catch (error) {
+            throw new Error('Error al actualizar producto', error)
+        }
+
+    }
 
 
     deleteProductToCart = async (cartId, productId) => {

@@ -16,7 +16,14 @@
             <li><img src="{{this.product.file}}" alt="{{this.product.title}}"></li>
             <li>{{this.product.title}}</li>
             <li>${{this.product.price}}</li>
-            <li>{{this.quantity}}</li>
+
+            <li>
+                <button class="update-product-button" data-product-id="{{this.product._id}}"
+                    data-action="decrease">-</button>
+                {{this.quantity}}
+                <button class="update-product-button" data-product-id="{{this.product._id}}"
+                    data-action="increase">+</button>
+            </li>
 
             <li><button class="deleteProductButtons" data-product-id="{{this.product._id}}">Eliminar</button></li>
         </ul>
