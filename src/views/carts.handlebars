@@ -17,12 +17,14 @@
             <li>{{this.product.title}}</li>
             <li>${{this.product.price}}</li>
 
-            <li>
-                <button class="update-product-button" data-product-id="{{this.product._id}}"
-                    data-action="decrease">-</button>
-                {{this.quantity}}
-                <button class="update-product-button" data-product-id="{{this.product._id}}"
-                    data-action="increase">+</button>
+            <li class="li-quantity">
+                <div class="updated-quantity">
+                    <button class="update-product-button updated-button" data-product-id="{{this.product._id}}"
+                        data-action="decrease">-</button>
+                    <p>{{this.quantity}}</p>
+                    <button class="update-product-button updated-button" data-product-id="{{this.product._id}}"
+                        data-action="increase">+</button>
+                </div>
             </li>
 
             <li><button class="deleteProductButtons" data-product-id="{{this.product._id}}">Eliminar</button></li>

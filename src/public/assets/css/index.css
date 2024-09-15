@@ -113,6 +113,39 @@ h3 {
     font-weight: 400;
 }
 
+.li-quantity {
+    display: flex;
+    justify-content: center;
+}
+
+.updated-quantity {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    border: 1px solid #1d1d1d;
+    border-left: none;
+    border-right: none;
+
+}
+
+
+.updated-quantity p {
+    align-self: center;
+    margin: 0 10px;
+
+}
+
+.updated-button {
+    padding: 0.7rem;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    border-left: 1px solid #1d1d1d;
+    border-right: 1px solid #1d1d1d;
+
+}
+
 
 
 
