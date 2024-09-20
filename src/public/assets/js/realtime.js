@@ -1,6 +1,8 @@
 console.log('hola socket');
 
 
+
+
 const socket = io()
 
 const form = document.querySelector('#form');
@@ -17,6 +19,9 @@ const myFile = document.querySelector('#myFile')
 
 
 
+
+
+// create product
 buttonEnviar.addEventListener('click', async (event) => {
     event.preventDefault()
 
@@ -65,12 +70,14 @@ buttonEnviar.addEventListener('click', async (event) => {
 })
 
 
-socket.on('listaProducts', (data) => {
-    let listaProductos = document.querySelector('#listaProducts')
-    let productosHTML = ''
+
+
+function renderProducts(data) {
+    let listaProductos = document.querySelector('#listaProducts');
+    let productosHTML = '';
 
     data.forEach(prod => {
-        productosHTML = productosHTML + `
+        productosHTML += `
         <div class="lista-container">
            <ul class="lista-productos">
                 <li><img src="${prod.file}" alt="${prod.title}"></li>
@@ -80,12 +87,30 @@ socket.on('listaProducts', (data) => {
                 <li>$${prod.price}</li>
                 <li>${prod.stock}</li>
                 <li>${prod.code}</li>
+                <li><button class="deleteProductButton" data-product-id="${prod._id}">Eliminar</button></li>
             </ul>
         </div>
-        `
+        `;
     });
-    listaProductos.innerHTML = productosHTML
-})
 
+    listaProductos.innerHTML = productosHTML;
 
+    // Asignar eventos de eliminación a los botones
+    const deleteProductButtons = document.querySelectorAll('.deleteProductButton');
+    deleteProductButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            const productId = event.target.getAttribute('data-product-id');
+            socket.emit('deletedProduct', productId); // Emitir el evento para eliminar producto
+        });
+    });
+}
+
+socket.on('listaProducts', (data) => {
+    renderProducts(data);
+});
+
+socket.on('updatedCart', (data) => {
+    renderProducts(data); // Reutiliza la misma función para actualizar la lista de productos
+});
 
