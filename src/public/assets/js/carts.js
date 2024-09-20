@@ -56,7 +56,7 @@ updateProductButtons.forEach(button => {
             console.log('Cantidad actualizada', data)
 
         } catch (error) {
-            console.error('Error al actualizar cantidad dell producto, la respuesta no se pudo enviar al servidor', error)
+            console.error('Error al actualizar cantidad del producto, la respuesta no se pudo enviar al servidor', error)
         }
     })
 })
