@@ -3,7 +3,6 @@ const { Router } = require('express');
 const ProductDaosMongo = require('../../daos/MONGO/productsDaos.mongo.js')
 const productModel = require('../../models/productModel.js')
 const uploader = require('../../utils/multer.js');
-const { getIo } = require('../../socket.js'); // Importa getIo desde socket.js
 
 const router = Router();
 const productService = new ProductDaosMongo()
@@ -45,9 +44,7 @@ router.post('/upload', uploader.single('myFile'), async (req, res) => {
             await productService.createProduct(title, category, description, price, filePath, stock, code);
 
             const updatedProducts = await productService.getProducts();
-
-            const io = getIo();
-            io.emit('listaProducts', updatedProducts);
+            res.json({ status: 'socces', updatedProducts })
         } catch (error) {
             res.status(500).send({ status: 'error', message: 'Error de servidor' });
             console.log('Error al agregar producto:', error);
