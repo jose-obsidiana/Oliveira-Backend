@@ -9,17 +9,26 @@ class CartDaosMongo {
     }
 
 
+
     getCartById = async (id) => {
         try {
-            //const cart = await this.model.findOne({ _id: id });
+            if (!mongoose.isValidObjectId(id)) {
+                throw new Error('ID no válido');
+            }
+            console.log('ID recibido en daos:', id);
             const cart = await this.model.findById(id).populate('products.product');
+            if (!cart) {
+                throw new Error('Carrito no encontrado');
+            }
 
-            return cart
+            return cart;
         } catch (error) {
-            console.log('No se puede obtener el carrito seleccionado')
-            throw new Error;
+            console.log('No se puede obtener el carrito seleccionado', error);
+            throw new Error('Error al obtener el carrito');
         }
-    }
+    };
+
+
 
     createCart = async () => {
         try {
@@ -66,7 +75,7 @@ class CartDaosMongo {
 
 
 
-    updatedProductToCart = async (cartId, productId, quantityChange) => {
+    updatedProductToCart = async ({ cartId, productId, quantityChange }) => {
 
         try {
             const cart = await cartModel.findById(cartId)
@@ -93,7 +102,7 @@ class CartDaosMongo {
     }
 
 
-    deleteProductToCart = async (cartId, productId) => {
+    deleteProductToCart = async ({ cartId, productId }) => {
         try {
 
             const cartMongo = await cartModel.findById(cartId);
@@ -120,7 +129,7 @@ class CartDaosMongo {
 
             cartMongo.products.splice(productIndex, 1);
             const updatedCart = await cartMongo.save();
-            console.log('Carrito actualizado:', updatedCart);
+            console.log('Carrito actualizado: producto eliminado con exito');
             return updatedCart;
 
         } catch (error) {

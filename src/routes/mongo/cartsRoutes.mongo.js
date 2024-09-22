@@ -7,35 +7,34 @@ const cartService = new CartDaosMongo()
 
 
 router.get('/:cid', async (req, res) => {
+    console.log('Parámetros recibidos:', req.params)
+    const { cid } = req.params;
 
-    const { cid } = req.params
-    const cart = await cartService.getCartById(cid);
-
-    console.log('Carrito obtenido:', JSON.stringify(cart, null, 2));
-
-
-    const cartMap = cart.products.map(prod => {
-        const { ...rest } = prod.toObject();
-        return rest;
-    })
+    console.log(cid)
+    if (!cid) {
+        return res.status(400).send({ status: 'error', message: 'ID de carrito no proporcionado' });
+    }
 
     try {
-        if (!cart) {
-            return res.status(400).send({ status: 'error', message: 'Error al obtener carrito' });
-        }
+        const cart = await cartService.getCartById(cid);
+        // console.log('Carrito obtenido:', JSON.stringify(cart, null, 2));
+
+        const cartMap = cart.products.map(prod => {
+            const { ...rest } = prod.toObject();
+            return rest;
+        });
 
         res.render('carts', {
             title: 'Cart',
             products: cartMap,
             style: 'index.css'
         });
-
     } catch (error) {
         console.error('Error al obtener el carrito:', error);
         res.status(500).send({ status: 'error', message: 'Error interno del servidor' });
     }
+});
 
-})
 
 router.post('/', async (req, res) => {
 

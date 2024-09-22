@@ -3,35 +3,25 @@
 
     <div class="lista-container cart-container">
         <ul class="lista-detalles ">
-            <li>Img</li>
+            <li></li>
             <li>Producto</li>
             <li>Precio</li>
             <li>Cantidad</li>
             <li>Acciones</li>
         </ul>
     </div>
-    {{#each products}}
-    <div class="cart-container">
-        <ul class="cart-detalles">
-            <li><img src="{{this.product.file}}" alt="{{this.product.title}}"></li>
-            <li>{{this.product.title}}</li>
-            <li>${{this.product.price}}</li>
 
-            <li class="li-quantity">
-                <div class="updated-quantity">
-                    <button class="update-product-button updated-button" data-product-id="{{this.product._id}}"
-                        data-action="decrease">-</button>
-                    <p>{{this.quantity}}</p>
-                    <button class="update-product-button updated-button" data-product-id="{{this.product._id}}"
-                        data-action="increase">+</button>
-                </div>
-            </li>
 
-            <li><button class="deleteProductButtons" data-product-id="{{this.product._id}}">Eliminar</button></li>
-        </ul>
+
+    <div class="products-cart">
+        {{!-- {{#each products}} --}}
+        {{!-- {{/each}} --}}
     </div>
-    {{/each}}
+
 
 </main>
 
+
+<script src="/socket.io/socket.io.js"></script>
 <script src="/static/assets/js/carts.js"></script>
+<script src="/static/assets/js/home.js"></script>

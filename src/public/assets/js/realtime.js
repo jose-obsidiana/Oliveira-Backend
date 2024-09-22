@@ -1,8 +1,5 @@
 console.log('hola socket');
 
-
-
-
 const socket = io()
 
 const form = document.querySelector('#form');

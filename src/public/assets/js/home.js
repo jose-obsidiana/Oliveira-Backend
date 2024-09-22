@@ -22,6 +22,7 @@ window.onload = function () {
                 user = result.value;
                 console.log('Nombre de usuario ingresado:', user);
                 localStorage.setItem('username', user)
+                console.log('username guardado en el localStorage', user)
 
                 fetch('/carts', {
                     method: 'POST',
@@ -41,7 +42,7 @@ window.onload = function () {
                         console.log('Cart ID guardado en el localStorage:', data.postCart._id);
                     })
                     .catch(error => {
-                        console.error('Error al enviar el nombre de usuario:', error);
+                        console.error('Error al guardar cartId en el localStorage:', error);
                     });
             }
         });
@@ -84,12 +85,14 @@ addToCartButtons.forEach(button => {
 })
 
 verCarrito.addEventListener('click', async (e) => {
-    e.preventDefault()
-    const cartId = localStorage.getItem('cartId')
+    e.preventDefault();
+    const cartId = localStorage.getItem('cartId');
+    console.log('Enviando el cartId a través del click', cartId); // Verifica aquí
     if (cartId) {
         window.location.href = `/carts/${cartId}`;
     } else {
-        alert('No hay carrito creado aún.');
+        alert('No se puede enviar el cartId a través del click');
     }
-})
+});
+
 
